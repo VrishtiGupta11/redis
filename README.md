@@ -23,3 +23,18 @@ Here, both client and server can be same or different computers.
 - Support for data types.
 - Atomicity i.e. if two different clients are concurrently accessing then redis will receive the updated values.
 - Multi-Utility tool (used for caching | messaging queue as it supports Publish and Subscribe | short lived data in application such as storing web application sessions, page count hits, etc.)
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| set name "Vrishti Gupta" | OK | |
+| get name | "Vrishti Gupta" | |
+| getrange name 0 8 | "Vrishti G" | |
+| mset language English Technology Redis | OK | |
+| mget language Technology | 1) "English" <br /> 2) "Redis" | |
+| strlen language | (integer) 7 | |
+| set counter 1 | OK | |
+| get counter | "1" | |
+| incr counter | (integer) 2 | |
+| incrby counter 10 | (integer) 12 | |
+| decr counter | (integer) 11 | |
+| decrby counter 8 | (integer) 3 | |
