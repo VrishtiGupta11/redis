@@ -38,3 +38,14 @@ Here, both client and server can be same or different computers.
 | incrby counter 10 | (integer) 12 | |
 | decr counter | (integer) 11 | |
 | decrby counter 8 | (integer) 3 | |
+| set pi 3.14 | OK | |
+| get pi | "3.14" | |
+| incrbyfloat pi 0.1 | "3.24" | | 
+| expire pi 10 | (integer) 1 | It will expire the value of pi after 10 seconds |
+| get pi | (nil) | Getting value of pi after 10 seconds |
+| ttl pi | (integer) -2 | Time to live for pi after 10 seconds |
+| setex var 30 "var_ttl = 30" | OK | To set expiry while setting the value |
+| keys * | 1) "name" <br /> 2) "Technology" <br /> 3) "language" <br /> 4) "counter" | To show all the keys |
+| flushdb ASYNC | OK | Deletes all keys from the connection's current database. |
+| keys * | (empty array) | |
+| flushall ASYNC | OK | Deletes all keys from all databases. |
