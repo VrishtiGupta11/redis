@@ -24,6 +24,11 @@ Here, both client and server can be same or different computers.
 - Atomicity i.e. if two different clients are concurrently accessing then redis will receive the updated values.
 - Multi-Utility tool (used for caching | messaging queue as it supports Publish and Subscribe | short lived data in application such as storing web application sessions, page count hits, etc.)
 
+### Key-value commands
+
+<details>
+<summary>Click to expand!</summary>
+
 | Commands | Output | Description |
 |----------|--------|-------------|
 | set name "Vrishti Gupta" | OK | |
@@ -49,3 +54,24 @@ Here, both client and server can be same or different computers.
 | flushdb ASYNC | OK | Deletes all keys from the connection's current database. |
 | keys * | (empty array) | |
 | flushall ASYNC | OK | Deletes all keys from all databases. |
+
+</details>
+
+### List commands
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| lpush country India UK | (integer) 2 | |
+| lrange country 0 -1 | 1) "UK" <br /> 2) "India" | |
+| rpush country USA | (integer) 3 | |
+| lrange country 0 -1 | 1) "UK" <br /> 2) "India" <br /> 3) "USA" | |
+| llen country | (integer) 3 | |
+| lset country 0 Russia | OK | |
+| lrange country 0 -1 | 1) "Russia" <br /> 2) "India" <br /> 3) "USA" | |
+| linsert country BEFORE USA UK | (integer) 4 | |
+| lrange country 0 -1 | 1) "Russia" <br /> 2) "India" <br /> 3) "UK" <br /> 4) "USA" | |
+| linsert country AFTER India Italy | (integer) 5 | |
+| lrange country 0 -1 | 1) "Russia" <br /> 2) "India" <br /> 3) "Italy" <br /> 4) "UK" <br /> 5) "USA" | |
+| lindex country 1 | "India" | |
+| lpushx Movies "Harry Potter" "3 idiots" | (integer) 0 | Pushes the element, only if key (list) exists |
+| sort country ALPHA | 1) "India" <br /> 2) "Italy" <br /> 3) "Russia" <br /> 4) "UK" <br /> 5) "USA" | |
