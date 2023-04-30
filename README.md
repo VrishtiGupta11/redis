@@ -24,6 +24,12 @@ Here, both client and server can be same or different computers.
 - Atomicity i.e. if two different clients are concurrently accessing then redis will receive the updated values.
 - Multi-Utility tool (used for caching | messaging queue as it supports Publish and Subscribe | short lived data in application such as storing web application sessions, page count hits, etc.)
 
+### Start the redis server
+`sudo service redis-server start`
+
+### Connect to redis-cli
+redis-cli
+
 ### Key-value commands
 
 <details>
@@ -59,6 +65,9 @@ Here, both client and server can be same or different computers.
 
 ### List commands
 
+<details>
+<summary>Click to expand!</summary>
+
 | Commands | Output | Description |
 |----------|--------|-------------|
 | lpush country India UK | (integer) 2 | |
@@ -75,3 +84,26 @@ Here, both client and server can be same or different computers.
 | lindex country 1 | "India" | |
 | lpushx Movies "Harry Potter" "3 idiots" | (integer) 0 | Pushes the element, only if key (list) exists |
 | sort country ALPHA | 1) "India" <br /> 2) "Italy" <br /> 3) "Russia" <br /> 4) "UK" <br /> 5) "USA" | |
+
+</details>
+
+### Set commands
+
+<details>
+<summary>Click to expand!</summary>
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| sadd technology Java Redis React Flutter Angular MongoDB Firebase | (integer) 7 | To add elements in set |
+| smembers technology | 1) "React" <br /> 2) "Java" <br /> 3) "Redis" <br /> 4) "MongoDB" <br /> 5) "Firebase" <br /> 6) "Flutter" <br /> 7) "Angular" | To get the elements of the set |
+| scard technology | (integer) 7 | To get the count of the elements in the set |
+| sismember technology Java | (integer) 1 | |
+| sadd frontend React Angular HTML CSS | (integer) 4 | |
+| sdiff technology frontend | 1) "Flutter" <br /> 2) "MongoDB" <br /> 3) "Redis" <br /> 4) "Firebase" <br /> 5) "Java" | Returns difference b/w sets i.e elements that are not available in 2nd set |
+| sdiffstore diffSet technology frontend | (integer) 5 | To store the result in some other set |
+| sinter technology frontend | 1) "Angular" <br /> 2) "React" | Returns the intersection of two sets |
+|  sinterstore interSet technology frontend | (integer) 2 | To store the result of intersection in some other set |
+| sunion technology frontend | 1) "Firebase" <br /> 2) "HTML" <br /> 3) "Flutter" <br /> 4) "Angular" <br /> 5) "Java" <br /> 6) "React" <br /> 7) "MongoDB" <br /> 8) "Redis" <br /> 9) "CSS" | |
+| sunionstore unionSet technology frontend | (integer) 9 | |
+
+</details>
