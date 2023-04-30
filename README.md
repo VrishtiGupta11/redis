@@ -28,7 +28,7 @@ Here, both client and server can be same or different computers.
 `sudo service redis-server start`
 
 ### Connect to redis-cli
-redis-cli
+`redis-cli`
 
 ### Key-value commands
 
