@@ -30,7 +30,7 @@ Here, both client and server can be same or different computers.
 ### Connect to redis-cli
 `redis-cli`
 
-### Key-value commands
+### String commands
 
 <details>
 <summary>Click to expand!</summary>
