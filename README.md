@@ -130,3 +130,20 @@ https://redis.io/docs/getting-started/installation/install-redis-on-windows/
 | zremrangebyrank users 0 1 | (integer) 2 | To remove elements within the given range according to the rank |
 
 </details>
+
+### Hyperloglog commands
+
+<details>
+<summary>Click to expand!</summary>
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| pfadd hll a b c d e f g | (integer) 1 | add elements in hyperloglog |
+| pfcount hll | (integer) 7 | |
+| pfadd hll2 1 2 3 4 5 6 7 | (integer) 1 | |
+| pfcount hll2 | (integer) 7 | |
+| pfmerge mergedhll hll hll2 | OK | |
+| pfcount mergedhll | (integer) 14 | |
+
+</details>
+
