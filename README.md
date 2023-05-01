@@ -107,3 +107,26 @@ Here, both client and server can be same or different computers.
 | sunionstore unionSet technology frontend | (integer) 9 | |
 
 </details>
+
+### Sorted set commands
+
+<details>
+<summary>Click to expand!</summary>
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| zadd users 110 Vrishti 22 Hermione 44 Harry 35 John 20 Alexa | (integer) 5 | To add elements in sorted set along with their score |
+| zrange users 0 -1 | 1) "Alexa" <br /> 2) "Hermione" <br /> 3) "John" <br /> 4) "Harry" <br /> 5) "Vrishti" | |
+| zrange users 0 -1 withscores | 1) "Alexa" <br />  2) "20" <br />  3) "Hermione" <br />  4) "22" <br />  5) "John" <br />  6) "35" <br />  7) "Harry" <br />  8) "44" <br />  9) "Vrishti" <br /> 10) "110" | To get all the elements in sorted aet along with their scores. |
+| zcard users | (integer) 5 | To get the count of number of elements in sorted set |
+| zcount users 10 40 | (integer) 3 | To get the count of number of elements within the given range according to the score |
+| zcount users -inf +inf | (integer) 5 | |
+| zrem users Alexa | (integer) 1 | To remove any element from sorted set |
+| zrange users 0 -1 rev withscores <br /> or <br /> zrevrange users 0 -1 withscores | 1) "Vrishti" <br /> 2) "110" <br /> 3) "Harry" <br /> 4) "44" <br /> 5) "John" <br /> 6) "35" <br /> 7) "Hermione" <br /> 8) "22"
+| zscore users Vrishti | "110" | To get the zscore of any element |
+| zrange users 40 10 byscore rev withscores <br /> or <br /> zrevrangebyscore users 40 10 withscores | 1) "John" <br /> 2) "35" <br /> 3) "Hermione" <br /> 4) "22" | |
+| zincrby users 20 Hermione | "42" | To increment the score of any element |
+| zremrangebyscore users 0 20 | (integer) 0 | To remove elements within the given range according to the score |
+| zremrangebyrank users 0 1 | (integer) 2 | To remove elements within the given range according to the rank |
+
+</details>
