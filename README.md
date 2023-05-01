@@ -1,8 +1,5 @@
 # Redis
 
-### Installation
-https://redis.io/docs/getting-started/installation/install-redis-on-windows/
-
 ### About Redis
 - In memory data structure store.
 - Used as NoSQL database.
@@ -23,6 +20,9 @@ Here, both client and server can be same or different computers.
 - Support for data types.
 - Atomicity i.e. if two different clients are concurrently accessing then redis will receive the updated values.
 - Multi-Utility tool (used for caching | messaging queue as it supports Publish and Subscribe | short lived data in application such as storing web application sessions, page count hits, etc.)
+
+### Installation
+https://redis.io/docs/getting-started/installation/install-redis-on-windows/
 
 ### Start the redis server
 `sudo service redis-server start`
