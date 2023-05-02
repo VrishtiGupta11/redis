@@ -158,7 +158,7 @@ https://redis.io/docs/getting-started/installation/install-redis-on-windows/
 | hkeys mp | 1) "name" <br /> 2) "Phone" <br /> 3) "age" | |
 | hvals mp | 1) "Vrishti" <br /> 2) "0123456789" <br /> 3) "18" | |
 | hgetall mp | 1) "name" <br /> 2) "Vrishti" <br /> 3) "Phone" <br /> 4) "0123456789" <br /> 5) "age" <br /> 6) "18" | |
-| hexists mp name | (integer) 1 | |
+| hexists mp name | (integer) 1 | To check if key exists in map |
 | hlen mp | (integer) 3 | |
 | hmget mp name Phone | 1) "Vrishti" <br /> 2) "0123456789" | |
 | hincrby mp age 2 | (integer) 20 | |
