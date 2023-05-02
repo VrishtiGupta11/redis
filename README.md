@@ -267,3 +267,14 @@ OK
 **Conclusion:** If there is change in state of variable (currently being watched), then the another change will not be executed on the watched variable.
 
 </details>
+
+### Pubsub commands
+
+| Session | Commands | Output | Description |
+|---------|----------|--------|-------------|
+| A | subscribe codeit | Reading messages... (press Ctrl-C to quit) <br /> 1) "subscribe" <br /> 2) "codeit" <br /> 3) (integer) 1 | To subscribe to a particular channel |
+| B | publish codeit "Hello codeit subscribers" | (integer) 1 | |
+| C | psubscribe news* h?llo b[ai]ll | Reading messages... (press Ctrl-C to quit) <br /> 1) "psubscribe" <br /> 2) "news*" <br /> 3) (integer) 1 <br /> 1) "psubscribe" <br /> 2) "h?llo" <br /> 3) (integer) 2 <br /> 1) "psubscribe" <br /> 2) "b[ai]ll" <br /> 3) (integer) 3 | To subscribe to some channel based on some pattern |
+| B | pubsub channels | 1) "codeit" | Returns all the subscribed channels apart from pattern based subscriptions |
+| B | pubsub numsub codeit | 1) "codeit" <br /> 2) (integer) 1 | To get the number of subscribers for the particular channel |
+| B | pubsub numpat | (integer) 3 | It returns no. of pattern based subscriptions |
