@@ -168,3 +168,102 @@ https://redis.io/docs/getting-started/installation/install-redis-on-windows/
 | hsetnx mp name VG | (integer) 0 | To set the key value pair if it doesn't exist |
 
 </details>
+
+### Redis Transactions
+
+<details>
+<summary>Click to expand!</summary>
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| multi | OK | All commands after multi will be queued up until exec or discard |
+| sadd even 2 4 6 8 | QUEUED | |
+| smembers even | QUEUED | |
+| hset emailName "user1@example.com" User1 "user2@example.com" User2 | QUEUED | |
+| hmget EmailName "user1@example.com" | QUEUED | |
+| exec | 1) (integer) 4 <br /> 2) 1) "2" <br />    &nbsp;&nbsp;&nbsp;2) "4"<br />    &nbsp;&nbsp;&nbsp;3) "6"<br />    &nbsp;&nbsp;&nbsp;4) "8"<br /> 3) (integer) 2<br /> 4) 1) (nil) | All queued up transactions before it will be executed |
+| discard | OK | All queued up transactions before it will be discarded |
+| watch odd | OK | If at least one watched key is modified before the EXEC command, the whole transaction aborts, and EXEC returns a Null reply to notify that the transaction failed. | 
+
+**exec command:**
+```
+127.0.0.1:6379> multi
+OK
+127.0.0.1:6379(TX)> sadd even 2 4 6 8
+QUEUED
+127.0.0.1:6379(TX)> smembers even
+QUEUED
+127.0.0.1:6379(TX)> hset emailName "user1@example.com" User1 "user2@example.com" User2
+QUEUED
+127.0.0.1:6379(TX)> hmget EmailName "user1@example.com"
+QUEUED
+127.0.0.1:6379(TX)> exec
+1) (integer) 4
+2) 1) "2"
+   2) "4"
+   3) "6"
+   4) "8"
+3) (integer) 2
+4) 1) (nil)
+```
+
+**discard command:**
+```
+127.0.0.1:6379> multi
+OK
+127.0.0.1:6379(TX)> sadd odd 1 3 5 7
+QUEUED
+127.0.0.1:6379(TX)> smembers odd
+QUEUED
+127.0.0.1:6379(TX)> discard
+OK
+```
+
+**1. watch command:**
+| Session | Commands | Output | Description |
+|---------|----------|--------|-------------|
+| A | set powerLevel 10 | OK | |
+| A | watch powerLevel | OK | |
+| B | watch powerLevel | OK | |
+| A | incr powerLevel | (integer) 11 | |
+| B | incr powerLevel | (integer) 12 | |
+| A | multi | OK | |
+| B | multi | OK | |
+| A | set powerLevel 11 | QUEUED | |
+| B | set powerLevel 13 | QUEUED | |
+| A | exec | (nil) | |
+| B | exec | (nil) | |
+| A | get powerLevel | "12" | |
+
+**2. watch command:**
+| Session | Commands | Output | Description |
+|---------|----------|--------|-------------|
+| A | set energyLevel High | OK | |
+| A | watch energyLevel | OK | |
+| B | watch energyLevel | OK | |
+| A | multi | OK | |
+| B | multi | OK | |
+| A | set energyLevel "Super High" | QUEUED | |
+| B | set energyLevel "Low" | QUEUED | |
+| A | exec | 1) OK | |
+| B | exec | (nil) | |
+| A | get energyLevel | "Super High" | |
+
+**3. watch command:**
+| Session | Commands | Output | Description |
+|---------|----------|--------|-------------|
+| A | set energyLevel High | OK | |
+| A | watch energyLevel | OK | |
+| A | set energyLevel Low | OK | |
+| B | set energyLevel Medium | OK | |
+| A | multi | OK | |
+| B | multi | OK | |
+| A | set energyLevel High | QUEUED | |
+| B | set energyLevel "Super High" | QUEUED | |
+| A | exec | (nil) | |
+| B | exec | 1) OK | |
+| A | get energyLevel | "Super High" | |
+
+**Conclusion:** If there is change in state of variable (currently being watched), then the another change will not be executed on the watched variable.
+
+</details>
