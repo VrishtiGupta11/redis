@@ -147,3 +147,24 @@ https://redis.io/docs/getting-started/installation/install-redis-on-windows/
 
 </details>
 
+### Hash commands
+
+<details>
+<summary>Click to expand!</summary>
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| hset mp name Vrishti Phone 0123456789 age 18 <br /> or <br /> hmset mp name Vrishti Phone 0123456789 age 18 | (integer) 3 | |
+| hkeys mp | 1) "name" <br /> 2) "Phone" <br /> 3) "age" | |
+| hvals mp | 1) "Vrishti" <br /> 2) "0123456789" <br /> 3) "18" | |
+| hgetall mp | 1) "name" <br /> 2) "Vrishti" <br /> 3) "Phone" <br /> 4) "0123456789" <br /> 5) "age" <br /> 6) "18" | |
+| hexists mp name | (integer) 1 | |
+| hlen mp | (integer) 3 | |
+| hmget mp name Phone | 1) "Vrishti" <br /> 2) "0123456789" | |
+| hincrby mp age 2 | (integer) 20 | |
+| hincrbyfloat mp age 1.1 | "21.1" | |
+| hdel mp Phone | (integer) 1 | |
+| hstrlen mp name | (integer) 7 | |
+| hsetnx mp name VG | (integer) 0 | To set the key value pair if it doesn't exist |
+
+</details>
