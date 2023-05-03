@@ -304,3 +304,10 @@ OK
 | script flush | OK | It removes all the stored scripts |
 
 </details>
+
+### Connection and security
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| select 1 | OK | To select db at any index |
+
