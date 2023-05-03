@@ -270,6 +270,9 @@ OK
 
 ### Pubsub commands
 
+<details>
+<summary>Click to expand!</summary>
+
 | Session | Commands | Output | Description |
 |---------|----------|--------|-------------|
 | A | subscribe codeit | Reading messages... (press Ctrl-C to quit) <br /> 1) "subscribe" <br /> 2) "codeit" <br /> 3) (integer) 1 | To subscribe to a particular channel |
@@ -278,3 +281,26 @@ OK
 | B | pubsub channels | 1) "codeit" | Returns all the subscribed channels apart from pattern based subscriptions |
 | B | pubsub numsub codeit | 1) "codeit" <br /> 2) (integer) 1 | To get the number of subscribers for the particular channel |
 | B | pubsub numpat | (integer) 3 | It returns no. of pattern based subscriptions |
+
+</details>
+
+### Scripts
+
+<details>
+<summary>Click to expand!</summary>
+
+| Commands | Output | Description |
+|----------|--------|-------------|
+| eval "return redis.call('get', KEYS[1])" 1 powerLevel | "12" | |
+| eval "return redis.call('set', KEYS[1], ARGV[1])" 1 name Vrishti | OK | |
+| eval "return redis.call('mset', KEYS[1], ARGV[1], KEYS[2], ARGV[2])" 2 fname lname Vrishti Gupta | OK | |
+| hmset country_cap India "New Delhi" USA "Washington DC" Russia Moscow Germany Berlin Japan Tokyo Italy Rome | OK | |
+| zadd country_name 1 Italy 2 India 3 USA | (integer) 3 | |
+| eval "return redis.call('hmget', KEYS[1], ARGV[1])" 1 country_cap India | 1) "New Delhi" | |
+| eval "local countries = redis.call('zrange', KEYS[1], 0, -1); return redis.call('hmget', KEYS[2], unpack(countries))" 2 country_name country_cap | 1) "Rome" <br /> 2) "New Delhi" <br /> 3) "Washington DC" | To get the values for the countries from map present in sorted set |
+| script load "return redis.call('hmget', KEYS[1], ARGV[1])" | "705ff480e4b3f49235b87636f8c77b5fb027d16d" | It will save the script and return hash |
+| evalsha 705ff480e4b3f49235b87636f8c77b5fb027d16d 1 country_cap India | 1) "New Delhi" | To run the saved script |
+| script exists 705ff480e4b3f49235b87636f8c77b5fb027d16d | 1) (integer) 1 | To check if the script exists or not |
+| script flush | OK | It removes all the stored scripts |
+
+</details>
