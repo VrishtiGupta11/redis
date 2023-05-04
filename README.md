@@ -307,11 +307,16 @@ OK
 
 ### Connection and security
 
+<details>
+<summary>Click to expand!</summary>
+
 | Commands | Output | Description |
 |----------|--------|-------------|
 | select 1 | OK | To select db at any index |
 | client list | id=4 addr=127.0.0.1:xxxx laddr=127.0.0.1:xxxx fd=8 name= age=75 idle=0 flags=N db=0 sub=0 psub=0 ssub=0 multi=-1 qbuf=26 qbuf-free=20448 argv-mem=10 multi-mem=0 rbs=1024 rbp=0 obl=0 oll=0 omem=0 tot-mem=22298 events=r cmd=client/list user=default redir=-1 resp=2 | |
 | client getName | (nil) | |
-| client kill id <id> | | |
-| config set requirepass <password> | OK | |
-| auth <password> | OK | |
+| client kill id `id` | | |
+| config set requirepass `password` | OK | |
+| auth `password` | OK | |
+
+</details>
